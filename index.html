@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulma Responsive Cards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        body{
+            background-color: black;
+        }
+        .row{
+            color:white;
+            padding-bottom:5px;
+        }
+        .des{
+            color:rgb(223, 216, 216);
+            padding-top:5px;
+            padding-bottom:10px;
+        }
+        .container{
+            height: 100%;
+            padding-top:2%;
+        }
+        .custom-card {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 10px;
+            height: 100%;
+        }
+       
+        .content1{
+            padding: 3% 10px 0 10px;
+            color:white;
+        }
+        .img{
+            background-image: url(image/118568-3840x2160-desktop-4k-avengers-background-photo.jpg);
+            background-size: 100% 100%;
+            max-width: 100%;
+            height: 100vh;
+            background-color: transparent;
+        }
+
+@media (max-width: 768px) {
+    .img{
+        height: auto;
+
+    }
+}
+.header{
+    width:100%;
+    height:100px;
+    color: rgb(184, 5, 5);
+    background-color:rgba(51, 51, 51, 0.3);
+    background-color: transparent;
+    padding-top: 1.5%;
+   
+}
+
+    </style>
+
+</head>
+<body>
+    <!--header-->
+   
+    <div class="header">
+        <h1><center>MARVEL STUDIO.COM</center></h1>
+    </div> 
+    <div class="img"></div>
+    <!--content-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Why are Marvel movies so popular?</h3>
+                <div class="des">
+                    Marvel Studios is a film and television production company and subsidiary
+                    of Walt Disney Studios that creates and produces content based on Marvel
+                    Comics characters and properties. Marvel Studios is known for its multi-film
+                    franchises, including the Marvel Cinematic Universe (MCU), X-Men, and Spider-Man.
+                    The studio is also responsible for animated television series and short films,
+                    such as Marvel Animated Features. Marvel Studios is an entertainment brand defined
+                    the stories and successes of our more than 8,000 incredible characters like Iron Man,
+                    Thor, Black Panther and Captain America. Based at the Walt Disney Studios in Burbank,
+                    California, Marvel Studios is one of the most successful movie studios in the world, today.
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 bg-light">
+                    <img src="image/MARVEL STUDIOS Logo vector.jfif" alt="Placeholder image" style="height: 260px; width: 600px;background-color: black;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--cards-->
+    <div class="content1">
+        <h2><center>MARVEL IRON-MAN MOVIES</center></h2>
+    </div>
+    <section class="section">
+        <div class="container">
+            <div class="columns is-multiline">
+                <div class="column is-one-quarter">
+                    <div class="card custom-card">
+                        <div class="card-image">
+                            <figure class="image is-4by5">
+                                <img src="image/iron man.jpg" alt="Placeholder image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content is-medium">
+                                <h5>Iron Man</h5>
+                            </div>
+                        </div>
+                        <div class="content is-normal">
+                            After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-one-quarter">
+                    <div class="card custom-card">
+                        <div class="card-image">
+                            <figure class="image is-4by5">
+                                <img src="image/ironman2.jpg" alt="Placeholder image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content is-medium">
+                                <h5>Iron Man 2</h5>
+                            </div>
+                        </div>
+                        <div class="content is-normal">
+                            the world now aware of his identity as Iron Man,
+                             Tony Stark must contend with both his declining
+                            health and a vengeful mad man with ties to his father's legacy.
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-one-quarter">
+                    <div class="card custom-card">
+                        <div class="card-image">
+                            <figure class="image is-4by5">
+                                <img src="image/ironman3.jpg" alt="Placeholder image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content is-medium">
+                                <h5>Iron Man 3</h5>
+                            </div>
+                        </div>
+                        <div class="content is-normal">
+                            When Tony Stark's world is torn apart by a formidable terrorist called the Mandarin,
+                             he starts an odyssey of rebuilding and retribution.
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-one-quarter">
+                    <div class="card custom-card">
+                        <div class="card-image">
+                            <figure class="image is-4by5">
+                                <img src="image/iron man 4.jfif" alt="Placeholder image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content is-medium">
+                                <h5>Iron Man 4</h5>
+                            </div>
+                        </div>
+                        <div class="content is-normal">
+                            Iron Man 4 is rumored to focus on Tony Stark's daughter, Morgan, 
+                            who inherits her father's genius and powers after his death.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Footer-->
+    <footer class="footer has-background-black-bis">
+        <div class="content has-text-centered has-text-white-ter">
+          <p>
+            Copyright ©2024 All Rights Reserved | Powered by Jatin Bohra
+          </p>
+        </div>
+      </footer>
+</body>
+</html>
