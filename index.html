@@ -1,194 +1,528 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bulma Responsive Cards</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <style>
-        *{
-            padding: 0px;
-            margin: 0px;
-        }
-        body{
-            background-color: black;
-        }
-        .row{
-            color:white;
-            padding-bottom:5px;
-        }
-        .des{
-            color:rgb(223, 216, 216);
-            padding-top:5px;
-            padding-bottom:10px;
-        }
-        .container{
-            height: 100%;
-            padding-top:2%;
-        }
-        .custom-card {
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 10px;
-            height: 100%;
-        }
-       
-        .content1{
-            padding: 3% 10px 0 10px;
-            color:white;
-        }
-        .img{
-            background-image: url(image/118568-3840x2160-desktop-4k-avengers-background-photo.jpg);
-            background-size: 100% 100%;
-            max-width: 100%;
-            height: 100vh;
-            background-color: transparent;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MARVEL Studio — Modern UI</title>
 
-@media (max-width: 768px) {
-    .img{
-        height: auto;
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+  <style>
+    :root{
+      --bg-a: #07010a;
+      --bg-b: #12010f;
+      --accent-1: #ff2d2d; /* Marvel red */
+      --accent-2: #00f0ff; /* cyan neon */
+      --glass: rgba(255,255,255,0.06);
+      --glass-2: rgba(255,255,255,0.04);
+      --muted: rgba(255,255,255,0.72);
+      --card-radius: 16px;
     }
-}
-.header{
-    width:100%;
-    height:100px;
-    color: rgb(184, 5, 5);
-    background-color:rgba(51, 51, 51, 0.3);
-    background-color: transparent;
-    padding-top: 1.5%;
-   
-}
 
-    </style>
+    /* Page-wide reset */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: #eaeaea;
+      background: linear-gradient(120deg,var(--bg-a),var(--bg-b));
+      overflow-x: hidden;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
 
+    /* animated gradient overlay (subtle) */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background: linear-gradient(60deg, rgba(255,45,45,0.06), rgba(0,240,255,0.04), rgba(150,0,255,0.03));
+      mix-blend-mode:screen;
+      pointer-events:none;
+      animation: bgShift 12s linear infinite;
+      z-index:0;
+    }
+    @keyframes bgShift{0%{transform:translateY(0)}50%{transform:translateY(6%)}100%{transform:translateY(0)}}
+
+    /* Layout container */
+    .wrap{
+      position:relative;
+      z-index:1;
+      max-width:1200px;
+      margin:40px auto;
+      padding:28px;
+    }
+
+    /* Header */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+    .brand .logo{
+      width:62px;
+      height:62px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background: linear-gradient(135deg,var(--accent-1),#ff7a7a);
+      box-shadow: 0 6px 18px rgba(255,45,45,0.16), inset 0 -4px 10px rgba(0,0,0,0.25);
+      font-family: "Orbitron", sans-serif;
+      color:white;
+      font-weight:700;
+      font-size:20px;
+    }
+    .brand h1{
+      margin:0;
+      font-family:"Orbitron",sans-serif;
+      letter-spacing:1px;
+      font-weight:700;
+      color: #fff;
+      font-size:20px;
+    }
+    .nav{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .btn-ghost{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      padding:8px 14px;
+      border-radius:12px;
+      color:var(--muted);
+      cursor:pointer;
+      transition:all .18s ease;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .btn-ghost:hover{ transform:translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.45) }
+
+    /* Hero */
+    .hero{
+      position:relative;
+      border-radius:18px;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:20px;
+      align-items:stretch;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:22px;
+      margin-bottom:26px;
+      box-shadow:
+        0 8px 30px rgba(2,2,8,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    /* left hero content - glass card style */
+    .hero-left{
+      padding:20px 24px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow:
+        12px 12px 30px rgba(0,0,0,0.6),
+        -4px -4px 18px rgba(255,255,255,0.02);
+    }
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:6px 10px;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(255,45,45,0.12), rgba(0,240,255,0.06));
+      color:var(--accent-1);
+      font-weight:600;
+      font-size:13px;
+      width:max-content;
+      box-shadow:0 6px 20px rgba(0,0,0,0.5);
+      margin-bottom:12px;
+    }
+    .hero-left h2{
+      margin:6px 0 12px;
+      font-size:28px;
+      line-height:1.05;
+      letter-spacing:0.6px;
+      color:#fff;
+    }
+    .hero-left p{ color: #d9d9d9; margin-bottom:16px; font-size:15px }
+    .hero-cta{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .btn-primary{
+      background: linear-gradient(90deg,var(--accent-1), #ff7a7a);
+      color:white;
+      padding:10px 16px;
+      border-radius:12px;
+      border:none;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 12px 30px rgba(255,45,45,0.16);
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+    .btn-primary:hover{ transform:translateY(-4px); box-shadow: 0 20px 40px rgba(255,45,45,0.2) }
+    .btn-outline{
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.06);
+      background:transparent;
+      color:var(--muted);
+      cursor:pointer;
+      transition: all .12s ease;
+      backdrop-filter: blur(6px);
+    }
+    .hero-meta{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      color:#bfc9d8;
+      font-size:13px;
+    }
+
+    /* hero-right image - neumorphic card with neon rim */
+    .hero-right{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px;
+    }
+    .poster{
+      width:100%;
+      max-width:360px;
+      border-radius:14px;
+      padding:8px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow:
+        12px 12px 30px rgba(2,2,10,0.7),
+        -8px -8px 24px rgba(255,255,255,0.02);
+      position:relative;
+      transition: transform .18s ease;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+    .poster img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:10px;
+    }
+    .poster::after{
+      content:'';
+      position:absolute;
+      inset: -2px;
+      border-radius:14px;
+      pointer-events:none;
+      background: linear-gradient(120deg, rgba(255,45,45,0.15), rgba(0,240,255,0.08));
+      mix-blend-mode:screen;
+      opacity:0.9;
+      filter: blur(14px);
+      transform: translateY(8px);
+      transition: transform .3s ease, opacity .3s ease;
+      z-index:0;
+    }
+    .poster:hover{ transform: translateY(-6px) rotate(-1deg) }
+    .poster:hover::after{ transform: translateY(0); opacity:1 }
+
+    /* Cards gallery (grid) */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:18px;
+      margin-top:8px;
+    }
+    .card{
+      border-radius: var(--card-radius);
+      padding:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.015));
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow:
+        8px 10px 28px rgba(2,2,8,0.6),
+        inset 0 2px 6px rgba(255,255,255,0.02);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height:400px;
+      position:relative;
+      overflow:hidden;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover{ transform: translateY(-8px); box-shadow: 0 26px 60px rgba(0,0,0,0.7) }
+
+    .card .thumb{
+      border-radius:10px;
+      overflow:hidden;
+      flex:0 0 180px;
+      height: 220px;
+    }
+    .card .thumb img{ width:100%; height:100%; object-fit:contain; display:block }
+
+    .card h3{
+      margin:0;
+      font-size:18px;
+      color:#fff;
+      font-weight:700;
+      font-family:"Orbitron", sans-serif;
+      letter-spacing:0.4px;
+    }
+    .card p{ margin:0; color:#d6d6d6; font-size:14px; line-height:1.4 }
+
+    /* neon tag ribbon */
+    .tag-ribbon{
+      position:absolute;
+      right:12px;
+      top:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      color:white;
+      background: linear-gradient(90deg,var(--accent-1), #ff7a7a);
+      box-shadow:0 8px 24px rgba(255,45,45,0.12);
+    }
+
+    /* card footer area */
+    .card .meta{
+      margin-top:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:8px;
+    }
+    .pill{
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:13px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+      color:var(--muted);
+      cursor:pointer;
+    }
+
+    /* Footer */
+    footer.site-foot{
+      margin-top:34px;
+      padding:18px;
+      text-align:center;
+      color: #bcbcbc;
+      font-size:14px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .grid{ grid-template-columns: repeat(3,1fr) }
+      .hero{ grid-template-columns: 1fr 320px }
+    }
+    @media (max-width: 820px){
+      .wrap{ padding:18px; margin:18px }
+      .hero{ grid-template-columns:1fr; gap:14px; padding:16px }
+      .hero-right{ order:-1 }
+      .grid{ grid-template-columns: repeat(2, 1fr) }
+    }
+    @media (max-width:520px){
+      .grid{ grid-template-columns: 1fr }
+      .brand h1{ font-size:16px }
+      .poster{ max-width:280px }
+      .hero-left h2{ font-size:20px }
+      .hero-left p{ font-size:14px }
+    }
+
+    /* small glowing animated accents for cyberpunk feel */
+    .neon-line{
+      height:4px;
+      width:120px;
+      border-radius:999px;
+      background: linear-gradient(90deg,var(--accent-2), rgba(255,45,45,0.85));
+      filter: blur(8px);
+      opacity:0.9;
+      margin-bottom:12px;
+      animation: neonPulse 2.6s ease-in-out infinite;
+    }
+    @keyframes neonPulse{0%{transform:scaleX(0.98); opacity:.6}50%{transform:scaleX(1.06); opacity:1}100%{transform:scaleX(0.98); opacity:.6}}
+
+    /* small helper */
+    .muted{ color:#bfc9d8; font-size:13px }
+  </style>
 </head>
 <body>
-    <!--header-->
-   
-    <div class="header">
-        <h1><center>MARVEL STUDIO.COM</center></h1>
-    </div> 
-    <div class="img"></div>
-    <!--content-->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h3>Why are Marvel movies so popular?</h3>
-                <div class="des">
-                    Marvel Studios is a film and television production company and subsidiary
-                    of Walt Disney Studios that creates and produces content based on Marvel
-                    Comics characters and properties. Marvel Studios is known for its multi-film
-                    franchises, including the Marvel Cinematic Universe (MCU), X-Men, and Spider-Man.
-                    The studio is also responsible for animated television series and short films,
-                    such as Marvel Animated Features. Marvel Studios is an entertainment brand defined
-                    the stories and successes of our more than 8,000 incredible characters like Iron Man,
-                    Thor, Black Panther and Captain America. Based at the Walt Disney Studios in Burbank,
-                    California, Marvel Studios is one of the most successful movie studios in the world, today.
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="p-3 bg-light">
-                    <img src="image/MARVEL STUDIOS Logo vector.jfif" alt="Placeholder image" style="height: 260px; width: 600px;background-color: black;">
-                </div>
-            </div>
+
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">MS</div>
+        <div>
+          <h1>MARVEL STUDIO</h1>
+          <div class="muted" style="font-size:12px">Cinematic Universe — Fan Showcase</div>
         </div>
-    </div>
-    <!--cards-->
-    <div class="content1">
-        <h2><center>MARVEL IRON-MAN MOVIES</center></h2>
-    </div>
-    <section class="section">
-        <div class="container">
-            <div class="columns is-multiline">
-                <div class="column is-one-quarter">
-                    <div class="card custom-card">
-                        <div class="card-image">
-                            <figure class="image is-4by5">
-                                <img src="image/iron man.jpg" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="content is-medium">
-                                <h5>Iron Man</h5>
-                            </div>
-                        </div>
-                        <div class="content is-normal">
-                            After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.
-                        </div>
-                    </div>
-                </div>
-                <div class="column is-one-quarter">
-                    <div class="card custom-card">
-                        <div class="card-image">
-                            <figure class="image is-4by5">
-                                <img src="image/ironman2.jpg" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="content is-medium">
-                                <h5>Iron Man 2</h5>
-                            </div>
-                        </div>
-                        <div class="content is-normal">
-                            the world now aware of his identity as Iron Man,
-                             Tony Stark must contend with both his declining
-                            health and a vengeful mad man with ties to his father's legacy.
-                        </div>
-                    </div>
-                </div>
-                <div class="column is-one-quarter">
-                    <div class="card custom-card">
-                        <div class="card-image">
-                            <figure class="image is-4by5">
-                                <img src="image/ironman3.jpg" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="content is-medium">
-                                <h5>Iron Man 3</h5>
-                            </div>
-                        </div>
-                        <div class="content is-normal">
-                            When Tony Stark's world is torn apart by a formidable terrorist called the Mandarin,
-                             he starts an odyssey of rebuilding and retribution.
-                        </div>
-                    </div>
-                </div>
-                <div class="column is-one-quarter">
-                    <div class="card custom-card">
-                        <div class="card-image">
-                            <figure class="image is-4by5">
-                                <img src="image/iron man 4.jfif" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="content is-medium">
-                                <h5>Iron Man 4</h5>
-                            </div>
-                        </div>
-                        <div class="content is-normal">
-                            Iron Man 4 is rumored to focus on Tony Stark's daughter, Morgan, 
-                            who inherits her father's genius and powers after his death.
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+
+      <nav class="nav">
+        <button class="btn-ghost"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button class="btn-ghost"><i class="fa-solid fa-bell"></i></button>
+        <button class="btn-ghost"><i class="fa-solid fa-user"></i></button>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-left">
+        <div class="neon-line" aria-hidden="true"></div>
+        <div class="kicker"><i class="fa-solid fa-film"></i>&nbsp; Feature</div>
+        <h2>Why Marvel Movies Captivate Millions</h2>
+        <p>
+          Marvel Studios redefined blockbuster storytelling by building a shared universe, strong characters,
+          and ambitious visuals. From character-driven arcs to connected plots across films and series — it creates
+          emotional stakes and big spectacle.
+        </p>
+
+        <div class="hero-cta">
+          <button class="btn-primary">Explore Iron-Man Saga</button>
+          <button class="btn-outline">View Gallery</button>
         </div>
+
+        <div class="hero-meta">
+          <div class="muted"><i class="fa-regular fa-clock"></i> Updated: Nov 14, 2025</div>
+          <div class="muted"><i class="fa-solid fa-users"></i> 8,000+ characters</div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="poster" id="poster">
+          <img src="https://i.pinimg.com/736x/c9/bf/4c/c9bf4c381528790d513ab520d5f9722b.jpg" alt="Marvel Poster">
+        </div>
+      </div>
     </section>
-    <!--Footer-->
-    <footer class="footer has-background-black-bis">
-        <div class="content has-text-centered has-text-white-ter">
-          <p>
-            Copyright ©2024 All Rights Reserved | Powered by Jatin Bohra
-          </p>
-        </div>
-      </footer>
+
+    <!-- GRID OF CARDS -->
+    <section>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <h2 style="margin:0;font-family:'Orbitron',sans-serif">MARVEL IRON-MAN MOVIES</h2>
+        <div class="muted">Hand-picked selection • Hover cards for effect</div>
+      </div>
+
+      <div class="grid">
+        <!-- Card 1 -->
+        <article class="card">
+          <div class="tag-ribbon">2008</div>
+          <div class="thumb">
+            <img src="https://i.pinimg.com/736x/52/be/e1/52bee1ca0ef72474b398b4b23ae2d911.jpg" alt="Iron Man">
+          </div>
+          <h3>Iron Man</h3>
+          <p>After being held captive, billionaire Tony Stark builds a powered suit to escape and fight the forces threatening him.</p>
+
+          <div class="meta">
+            <div class="pill"><i class="fa-solid fa-star"></i>&nbsp; 7.9</div>
+            <div style="display:flex;gap:8px">
+              <div class="pill">Action</div>
+              <div class="pill">2008</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card">
+          <div class="tag-ribbon" style="background:linear-gradient(90deg,#ffb74d,#ff704d)">2010</div>
+          <div class="thumb">
+            <img src="https://i.pinimg.com/736x/f0/9f/79/f09f793b5cc11cde8f9b1a6faa9a69d7.jpg" alt="Iron Man 2">
+          </div>
+          <h3>Iron Man 2</h3>
+          <p>The world knows Stark is Iron Man. He faces enemies, declining health, and his father's legacy.</p>
+
+          <div class="meta">
+            <div class="pill"><i class="fa-solid fa-star"></i>&nbsp; 7.0</div>
+            <div style="display:flex;gap:8px">
+              <div class="pill">Drama</div>
+              <div class="pill">2010</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card">
+          <div class="tag-ribbon" style="background:linear-gradient(90deg,#9c27b0,#e040fb)">2013</div>
+          <div class="thumb">
+            <img src="https://3.bp.blogspot.com/-E-p3JrvqpEA/UX65iuaX6EI/AAAAAAAAFNQ/mGz7Y_-Ctv0/s1600/Iron_Man_3_New_Poster_Final_Latino_V2_Cine_1.jpg" alt="Iron Man 3">
+          </div>
+          <h3>Iron Man 3</h3>
+          <p>Tony's world is shattered by a new enemy: the Mandarin. He must rebuild and seek retribution.</p>
+
+          <div class="meta">
+            <div class="pill"><i class="fa-solid fa-star"></i>&nbsp; 7.2</div>
+            <div style="display:flex;gap:8px">
+              <div class="pill">Thriller</div>
+              <div class="pill">2013</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="card">
+          <div class="tag-ribbon" style="background:linear-gradient(90deg,#00f0ff,#6ad8ff)">2025</div>
+          <div class="thumb">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLaL9lVKkB3QNF3tSCXo64B8rKU12DfsrGNu1JPUOU8Iv3psv8OsGQAd1q5bjQEW7doZM&usqp=CAU" alt="Iron Man 4">
+          </div>
+          <h3>Iron Man 4 (rumored)</h3>
+          <p>Rumors point to Morgan Stark inheriting Tony's genius — a new generational arc in the saga.</p>
+
+          <div class="meta">
+            <div class="pill"><i class="fa-solid fa-star"></i>&nbsp; —</div>
+            <div style="display:flex;gap:8px">
+              <div class="pill">Speculation</div>
+              <div class="pill">2025</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="site-foot">
+      © 2025 MARVEL Studio Fan Page — Powered by Jatin Bohra
+    </footer>
+  </div>
+
+  <!-- Minimal JS: slight 3D tilt/parallax for poster using mouse -->
+  <script>
+    (function(){
+      const poster = document.getElementById('poster');
+      const hero = document.getElementById('hero');
+
+      if(!poster || !hero) return;
+
+      function mapRange(value, a, b, c, d){
+        return c + (value - a) * (d - c) / (b - a);
+      }
+
+      hero.addEventListener('mousemove', (e) => {
+        const r = hero.getBoundingClientRect();
+        const mx = e.clientX - r.left;
+        const my = e.clientY - r.top;
+        const px = mapRange(mx, 0, r.width, -10, 10);
+        const py = mapRange(my, 0, r.height, -10, 10);
+        poster.style.transform = `translateY(${ -py/2 }px) translateX(${ -px/2 }px) rotateX(${ py/25 }deg) rotateY(${ -px/25 }deg)`;
+      });
+
+      hero.addEventListener('mouseleave', () => {
+        poster.style.transform = 'translateY(0) translateX(0) rotateX(0) rotateY(0)';
+      });
+    })();
+  </script>
 </body>
 </html>
